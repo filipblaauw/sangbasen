@@ -1,0 +1,66 @@
+<template name="songList">
+  {{#if currentUser}}
+  <div class="container marginContainer">
+      <div class="row">
+        <div class="col-xs-12">
+          {{> searchBox}}
+          <div class="text-center hidden-mobile">
+            <span class="iconDetails"><i class="fa fa-spotify" aria-hidden="true"></i> Spotify</span>
+            <span class="iconDetails"><i class="fa fa-headphones" aria-hidden="true"></i> Playback</span>
+            <span class="iconDetails"><i class="fa fa-file-text-o" aria-hidden="true"></i> Akkorder</span>
+            <span class="iconDetails"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF-noter</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-6">
+          <h3 class="text-center">Dine favoritter</h3>
+          {{#with favorites}}
+            {{#if this.count}}
+              <ul class="list-group">
+                {{#each this}}
+                  <li class="list-group-item">
+                    <a href="{{pathFor route='Song'}}" class="songTitle">{{title}}</a> - {{artist}}
+                    {{#if file}}
+                      <span class="pull-right hidden-mobile"><a href="{{file}}" download title="Last ned noter" data-toggle="tooltip" data-placement="left"><i class="fa fa-download" aria-hidden="true"></i></a></span>
+                    {{/if}}
+                  </li>
+                {{/each}}
+              </ul>
+            {{else}}
+              Ingen favoritter ennå
+            {{/if}}
+          {{/with}}
+        </div>
+        <div class="col-sm-6">
+          <h3 class="text-center">Mest likte</h3>
+          {{#with mostLiked}}
+            {{#if this.count}}
+              <ul class="list-group">
+                {{#each this}}
+                  <li class="list-group-item">
+                    <a href="{{pathFor route='Song'}}" class="songTitle">{{title}}</a> - {{artist}} <span class="likes pull-right hidden-mobile">{{likes}} <i class="fa fa-thumbs-up"></i></span>
+                  </li>
+                {{/each}}
+              </ul>
+            {{/if}}
+          {{/with}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="container marginContainer text-center">
+          <p class="small">
+            Sangbasen inneholder {{number}} sanger. Du kan <a href="{{pathFor route='add'}}">legge til flere</a>.<br>
+            Utviklet av Filip Blaauw
+          </p>
+        </div>
+      </div>
+
+  </div>
+  {{else}}
+    <div class="container marginContainer">
+      <h2>Du må logge inn for å se denne siden.</h2>
+    </div>
+  {{/if}}
+</template>

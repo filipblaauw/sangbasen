@@ -1,0 +1,57 @@
+<template name="insertSongForm">
+  <div class="container marginContainer">
+    <h1>Legg til ny sang</h1>
+    <p>
+      Tillatte filtyper er <code>.pdf</code>, <code>.jpg</code>, <code>.png</code> og <code>.gif</code>.
+      Noter med flere sider, kan slås sammen til ett pdf-dokument med <a href="http://smallpdf.com/merge-pdf" target="_blank">dette verktøyet</a>.
+    </p>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="progress hidden">
+          <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+            <span class="sr-only">{{progress}}% Complete</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      {{#autoForm collection="Songs" id="insertSongForm" type="insert"}}
+        <div class="col-md-4">
+          {{> afQuickField name='file'}}
+          {{> afQuickField name='title'}}
+          {{> afQuickField name='artist'}}
+          {{> afQuickField name='spotify'}}
+          {{> afQuickField name='genre'}}
+          {{> afQuickField name='key'}}
+          <p class="small text-muted">Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G.</p>
+          <div class="form-group">
+            <label for="selectFile" class="control-label">Last opp playbackspor</label>
+            <input type="file" class="uploadFile" id="file-track">
+          </div>
+          <div class="playbackUrl hidden">
+            {{> afQuickField name='track'}}
+          </div>
+        </div>
+        <div class="col-md-8">
+          <span class="pull-right small hjelp"><span class="fa fa-question-circle"></span> Hjelp</span>
+          <div class="hjelpetekst">
+            <p class="small">
+              Akkordene skrives over på linja over teksten. Du kan ikke ha tekst og akkorder på samme linje.
+            </p>
+            <p class="small">
+              I akkordrekker uten tekst under (f.eks. intro) bør det være 3 mellomrom mellom hver akkord.
+            </p>
+            <p class="small">
+              H-akkorder skrives på norsk med H, ikke engelsk B, Bm, etc.
+            </p>
+          </div>
+          {{> afQuickField name='chords'}}
+        </div>
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-success btn-tt"><span class="fa fa-check"></span> Legg til</button>
+        </div>
+      {{/autoForm}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,12 @@
+<template name="artist">
+  <div class="row">
+    <div class="container marginContainer">
+      <div class="col-xs-12">
+        <h2>Sanger av <span class="songTitle">{{artist}}</span></h2>
+        {{#each songs}}
+          <li><a href="{{pathFor route='Song'}}">{{title}}</a></li>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>

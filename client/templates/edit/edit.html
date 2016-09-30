@@ -1,0 +1,105 @@
+<template name="editSong">
+  <div class="container marginContainer">
+    {{#if isOwner}}
+      {{> autoformModals}}
+      <h1>Endre "{{title}}"</h1>
+      <hr>
+      <div class="row">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="progress hidden">
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
+                <span class="sr-only">{{progress}}% Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{#autoForm collection="Songs" doc=this id="editSongForm" type="update"}}
+          <div class="col-md-4">
+            {{> afQuickField name='file'}}
+            {{> afQuickField name='title'}}
+            {{> afQuickField name='artist'}}
+            {{> afQuickField name='spotify'}}
+            {{> afQuickField name='genre'}}
+            {{> afQuickField name='key'}}
+            <p class="small text-muted">Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G.</p>
+            <div class="form-group">
+              <label for="selectFile" class="control-label">Last opp playbackspor</label>
+              <input type="file" class="uploadFile" id="file-track">
+            </div>
+            <div class="playbackUrl hidden">
+              {{> afQuickField name='track'}}
+            </div>
+          </div>
+          <div class="col-md-8">
+            <span class="pull-right small hjelp"><span class="fa fa-question-circle"></span> Hjelp</span>
+            <div class="hjelpetekst">
+              <p class="small">
+                Akkordene skrives over på linja over teksten. Du kan ikke ha tekst og akkorder på samme linje.
+              </p>
+              <p class="small">
+                I akkordrekker uten tekst under (f.eks. intro) bør det være 3 mellomrom mellom hver akkord.
+              </p>
+              <p class="small">
+                H-akkorder skrives på norsk med H, ikke engelsk B, Bm, etc.
+              </p>
+            </div>
+            {{> afQuickField name='chords'}}
+          </div>
+          <div class="col-md-12">
+            {{#afModal class="btn btn-danger btn-tt" formId="deleteSongModal" collection="Songs" operation="remove" doc=_id buttonContent="Slett" buttonClasses="btn btn-danger deleteSong" prompt="Vil du virkelig slette denne sangen?" title="Slett"}}
+              <i class="fa fa-trash"></i> Slett
+            {{/afModal}}
+            <div class="pull-right">
+              <a type="button" class="btn btn-default btn-tt" href="{{pathFor route='Song'}}"><span class="fa fa-times"></span> Avbryt</a>
+              <button type="submit" class="btn btn-success btn-tt"><span class="fa fa-check"></span> Oppdater</button>
+            </div>
+          </div>
+        {{/autoForm}}
+      </div>
+
+    {{else}}
+      {{#if isInRole 'admin'}}
+        {{> autoformModals}}
+        <h1>Endre "{{title}}"</h1>
+        <hr>
+        <div class="row">
+          {{#autoForm collection="Songs" doc=this id="editSongForm" type="update"}}
+            <div class="col-md-4">
+              {{> afQuickField name='file'}}
+              {{> afQuickField name='title'}}
+              {{> afQuickField name='artist'}}
+              {{> afQuickField name='spotify'}}
+              {{> afQuickField name='genre'}}
+              {{> afQuickField name='key'}}
+              <p class="small text-muted">Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G.</p>
+              <div class="form-group">
+                <label for="selectFile" class="control-label">Last opp playbackspor</label>
+                <input type="file" class="uploadFile" id="file-track">
+              </div>
+              <div class="playbackUrl hidden">
+                {{> afQuickField name='track'}}
+              </div>
+            </div>
+            <div class="col-md-8">
+              {{> afQuickField name='chords'}}
+            </div>
+            <div class="col-md-12">
+              {{#afModal class="btn btn-danger btn-tt" formId="deleteSongModal" collection="Songs" operation="remove" doc=_id buttonContent="Slett" buttonClasses="btn btn-danger deleteSong" prompt="Vil du virkelig slette denne sangen?" title="Slett"}}
+                <i class="fa fa-trash"></i> Slett
+              {{/afModal}}
+              <div class="pull-right">
+                <a type="button" class="btn btn-default btn-tt" href="{{pathFor route='Song'}}"><span class="fa fa-times"></span> Avbryt</a>
+                <button type="submit" class="btn btn-success btn-tt"><span class="fa fa-check"></span> Oppdater</button>
+              </div>
+            </div>
+          {{/autoForm}}
+        </div>
+
+      {{else}}
+      <h1>Du kan ikke endre andre sine sanger</h1>
+      {{/if}}
+    {{/if}}
+  </div>
+
+</template>
