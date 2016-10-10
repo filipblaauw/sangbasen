@@ -1,23 +1,23 @@
 <template name="insertSongForm">
-  <div class="container marginContainer">
-    <h1>Legg til ny sang</h1>
-    <p>
-      Tillatte filtyper er <code>.pdf</code>, <code>.jpg</code>, <code>.png</code> og <code>.gif</code>.
-      Noter med flere sider, kan slås sammen til ett pdf-dokument med <a href="http://smallpdf.com/merge-pdf" target="_blank">dette verktøyet</a>.
-    </p>
-    <hr>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="progress hidden">
-          <div class="progress-bar" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%;">
-            <span class="sr-only">{{progress}}% Complete</span>
-          </div>
+  <div class="ui container">
+    <div class="ui grid">
+      <div class="ui dimmer">
+        <div class="ui big text loader">Laster opp fil... {{progress}}%</div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <h1 class="ui dividing header">Legg til ny sang</h1>
+          <p>
+            Tillatte filtyper er <code>.pdf</code>, <code>.jpg</code>, <code>.png</code> og <code>.gif</code>.
+            Noter med flere sider, kan slås sammen til ett pdf-dokument med <a href="http://smallpdf.com/merge-pdf" target="_blank">dette verktøyet</a>.
+          </p>
         </div>
       </div>
     </div>
-    <div class="row">
-      {{#autoForm collection="Songs" id="insertSongForm" type="insert"}}
-        <div class="col-md-4">
+
+    {{#autoForm collection="Songs" id="insertSongForm" type="insert"}}
+      <div class="ui stackable grid">
+        <div class="six wide column">
           {{> afQuickField name='file'}}
           {{> afQuickField name='title'}}
           {{> afQuickField name='artist'}}
@@ -25,33 +25,39 @@
           {{> afQuickField name='genre'}}
           {{> afQuickField name='key'}}
           <p class="small text-muted">Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G.</p>
-          <div class="form-group">
-            <label for="selectFile" class="control-label">Last opp playbackspor</label>
+          <div class="field">
+            <label>Last opp playbackspor</label>
             <input type="file" class="uploadFile" id="file-track">
           </div>
-          <div class="playbackUrl hidden">
+          <div class="playbackUrl hideMe">
             {{> afQuickField name='track'}}
           </div>
         </div>
-        <div class="col-md-8">
-          <span class="pull-right small hjelp"><span class="fa fa-question-circle"></span> Hjelp</span>
-          <div class="hjelpetekst">
-            <p class="small">
-              Akkordene skrives over på linja over teksten. Du kan ikke ha tekst og akkorder på samme linje.
-            </p>
-            <p class="small">
-              I akkordrekker uten tekst under (f.eks. intro) bør det være 3 mellomrom mellom hver akkord.
-            </p>
-            <p class="small">
-              H-akkorder skrives på norsk med H, ikke engelsk B, Bm, etc.
-            </p>
-          </div>
+
+        <div class="ten wide column">
           {{> afQuickField name='chords'}}
+
+          <div class="ui tiny right floated icon button hjelp">
+            <i class="help icon"></i>
+          </div>
+          <div class="ui hjelpetekst popup">
+            <p>Akkordene skrives over på linja over teksten. Du kan ikke ha tekst og akkorder på samme linje.</p>
+            <p>I akkordrekker uten tekst under (f.eks. intro) bør det være 3 mellomrom mellom hver akkord.</p>
+            <p>H-akkorder skrives på norsk med H, ikke engelsk B, Bm, etc.</p>
+          </div>
+
         </div>
-        <div class="col-md-12 text-center">
-          <button type="submit" class="btn btn-success btn-tt"><span class="fa fa-check"></span> Legg til</button>
+
+        <div class="row">
+          <div class="right aligned column">
+            <button type="submit" class="ui tiny labeled green icon button">
+              <i class="check icon"></i>
+              Legg til
+            </button>
+          </div>
         </div>
-      {{/autoForm}}
-    </div>
+      </div>
+    {{/autoForm}}
   </div>
+
 </template>

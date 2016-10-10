@@ -1,9 +1,9 @@
 Template.searchBox.helpers({
   inputAttributes: function () {
     placeholder = function() {
-      return "Søk etter sang, artist, sjanger";
+      return "Sang, artist, sjanger...";
     }
-    return { 'class': 'form-control input-lg', 'placeholder': placeholder };
+    return { 'class': '', 'placeholder': placeholder };
   },
   songsIndex: () => SongsIndex
 
@@ -15,34 +15,38 @@ Template.searchBox.events({
       .getComponentMethods()
       .addProps('sortBy', 'title')
     ;
-    $('th').removeClass('selected');
-    $('#sortTitle').addClass('selected');
+    $('th').removeClass('descending');
+    $('#sortTitle').addClass('descending');
   },
   'click #sortArtist': (e) => {
     SongsIndex
       .getComponentMethods()
       .addProps('sortBy', 'artist')
     ;
-    $('th').removeClass('selected');
-    $('#sortArtist').addClass('selected');
+    $('th').removeClass('descending');
+    $('#sortArtist').addClass('descending');
   },
   'click #sortGenre': (e) => {
     SongsIndex
       .getComponentMethods()
       .addProps('sortBy', 'genre')
     ;
-    $('th').removeClass('selected');
-    $('#sortGenre').addClass('selected');
+    $('th').removeClass('descending');
+    $('#sortGenre').addClass('descending');
   },
   'click #sortKey': (e) => {
     SongsIndex
       .getComponentMethods()
       .addProps('sortBy', 'key')
     ;
-    $('th').removeClass('selected');
-    $('#sortKey').addClass('selected');
+    $('th').removeClass('descending');
+    $('#sortKey').addClass('descending');
   },
   'click .clickable-row': function(e){
     window.document.location = ('sang/'+this.slug+'/'+this.slug2);
    }
+});
+
+Template.songList.onRendered(function() {
+  $('.popup').popup();
 });

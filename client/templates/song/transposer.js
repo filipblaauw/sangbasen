@@ -202,20 +202,20 @@
       var keyLinks = [];
       $(keys).each(function(i, key) {
           if (currentKey.name == key.name)
-              keyLinks.push("<button type='button' class='btn btn-sm btn-default selected'>" + key.name + "</button>");
+              keyLinks.push("<button type='button' class='ui mini active button'>" + key.name + "</button>");
           else
-              keyLinks.push("<button type='button' class='btn btn-sm btn-default'>" + key.name + "</button>");
+              keyLinks.push("<button type='button' class='ui mini button'>" + key.name + "</button>");
       });
 
 
       var $this = $(this);
-      var keysHtml = $("<div class='btn-group transpose-keys' role='group' aria-label='...'></div>");
+      var keysHtml = $("<div class='ui mini basic vertical right floated buttons chordgroup'></div>");
       keysHtml.html(keyLinks.join(""));
       $("button", keysHtml).click(function(e) {
           e.preventDefault();
           transposeSong($this, $(this).text());
-          $(".btn-group button").removeClass("selected");
-          $(this).addClass("selected");
+          $(".button").removeClass("active");
+          $(this).addClass("active");
           return false;
       });
 

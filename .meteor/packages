@@ -9,39 +9,40 @@ mobile-experience@1.0.4       # Packages for a great mobile UX
 mongo@1.1.12                   # The database Meteor supports right now
 blaze-html-templates@1.0.4    # Compile .html files into Meteor Blaze views
 session@1.1.6                 # Client-side reactive dictionary for your app
-jquery@1.11.9                  # Helpful client-side library
+jquery                  # Helpful client-side library
 tracker@1.1.0                 # Meteor's client-side reactive programming library
-
 es5-shim@4.6.14                # ECMAScript 5 compatibility for older browsers.
 ecmascript@0.5.8              # Enable ECMAScript2015+ syntax in app code
+standard-minifier-css@1.2.0
+standard-minifier-js@1.2.0
 email@1.1.17
 check@1.2.3
+
 iron:router
+semantic:ui
+useraccounts:semantic-ui
 aldeed:collection2
 aldeed:autoform
-themeteorchef:bert
-sacha:spin
-twbs:bootstrap
+fabienb4:autoform-semantic-ui
 edgee:slingshot
 ongoworks:security
 aldeed:tabular
 dburles:collection-helpers
 fortawesome:fontawesome
-fourseven:scss
+alanning:roles
 alethes:pages
 accounts-password@1.3.0
-accounts-ui@1.1.9
+iandouglas:accounts-ui-semantic-ui
 momentjs:moment
-useraccounts:bootstrap
+rzymek:moment-locale-nb
 useraccounts:iron-routing
 softwarerero:accounts-t9n
 reactive-var@1.0.10
 ryanswrt:autoform-slingshot
-yogiben:autoform-modals
-yogiben:admin
+kevohagan:sweetalert
+themeteorchef:bert
 todda00:friendly-slugs
 lookback:seo
 easy:search
-standard-minifier-css@1.2.0
-standard-minifier-js@1.2.0
 shell-server
+flemay:less-autoprefixer

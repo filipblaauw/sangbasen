@@ -5,22 +5,20 @@ Template.insertSongForm.helpers({
     var upload = uploader.get();
     if (upload)
       return Math.round(upload.progress() * 100);
-  }
+    }
 });
 
 Template.insertSongForm.events({
-  'click .hjelp': function(){
-    $('.hjelpetekst').slideToggle(300, function() {
-    // Animation complete.
-    });
-  },
+
   'change #file-file': function(event, template) {
     event.preventDefault();
-    $('.progress').removeClass('hidden');
+
+    $('.dimmer').addClass('active');
     var upload = new Slingshot.Upload("myFileUploads");
 
     upload.send(document.getElementById('file-file').files[0], function (error, downloadUrl) {
     uploader.set();
+
     if (error) {
       console.error('Error uploading');
       alert (error);
@@ -28,19 +26,22 @@ Template.insertSongForm.events({
     else{
       console.log("Success!");
       console.log('uploaded file available here: '+downloadUrl);
-      $('.progress').addClass('hidden');
+      $('.dimmer').removeClass('active');
       $('.file-upload-clear').html('<i class="fa fa-times"></i> Slett');
     }
     });
     uploader.set(upload);
   },
   'change #file-track': function(event, template) {
+
     event.preventDefault();
-    $('.progress').removeClass('hidden');
+    $('.dimmer').addClass('active');
+
     var upload = new Slingshot.Upload("myTrackUploads");
 
     upload.send(document.getElementById('file-track').files[0], function (error, downloadUrl) {
     uploader.set();
+
     if (error) {
       console.error('Error uploading');
       alert (error);
@@ -49,8 +50,8 @@ Template.insertSongForm.events({
       console.log("Success!");
       console.log('uploaded file available here: '+downloadUrl);
       $('input[name=track]').val(downloadUrl);
-      $('.playbackUrl').removeClass('hidden');
-      $('.progress').addClass('hidden');
+      $('.playbackUrl').removeClass('hideMe');
+      $('.dimmer').removeClass('active');
       $('.file-upload-clear').html('<i class="fa fa-times"></i> Slett');
     }
     });
@@ -59,9 +60,12 @@ Template.insertSongForm.events({
 });
 
 Template.insertSongForm.onRendered(function() {
-  $('.hjelpetekst').hide();
-  $('label[for="file-file"]').html('Velg fil<input class="hidden" id="file-file" file-input="file" type="file" accept="*">');
-  $('label[for="file-track"]').html('Velg fil<input class="hidden" id="file-track" file-input="file" type="file" accept="*">');
+  $('.hjelp').popup({
+    popup : $('.hjelpetekst.popup'),
+    on    : 'click'
+  });
+  $('label[for="file-file"]').html('<div class="ui button">Velg fil</div><input class="hideMe" id="file-file" file-input="file" type="file" accept="*">');
+  $('label[for="uploadFile"]').html('Velg fil<input class="hideMe" id="file-track" file-input="file" type="file" accept="*">');
 });
 
 AutoForm.addHooks(['insertSongForm'], {

@@ -7,12 +7,14 @@ Template.songList.helpers({
     return Songs.find({voters: user});
   },
   mostLiked: function() {
-    return Songs.find({likes: { $exists: true }}, {limit: 10, sort: {likes: "desc"}});
+    return Songs.find({likes: { $gt: 0 }}, {limit: 10, sort: {likes: "desc"}});
   }
 });
 
 Template.songList.onRendered(function() {
+/*
   $('[data-toggle="tooltip"]').tooltip({
     trigger : 'hover'
   });
+  */
 });

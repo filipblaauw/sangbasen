@@ -22,14 +22,9 @@ Template.editSong.helpers({
 });
 
 Template.editSong.events({
-  'click .hjelp': function(){
-    $('.hjelpetekst').slideToggle(300, function() {
-    // Animation complete.
-    });
-  },
   'change #file-file': function(event, template) {
     event.preventDefault();
-    $('.progress').removeClass('hidden');
+    $('.dimmer').addClass('active');
     var upload = new Slingshot.Upload("myFileUploads");
 
     upload.send(document.getElementById('file-file').files[0], function (error, downloadUrl) {
@@ -41,7 +36,7 @@ Template.editSong.events({
     else{
       console.log("Success!");
       console.log('uploaded file available here: '+downloadUrl);
-      $('.progress').addClass('hidden');
+      $('.dimmer').removeClass('active');
       $('.file-upload-clear').html('<i class="fa fa-times"></i> Slett');
     }
     });
@@ -49,7 +44,7 @@ Template.editSong.events({
   },
   'change #file-track': function(event, template) {
     event.preventDefault();
-    $('.progress').removeClass('hidden');
+    $('.dimmer').addClass('active');
     var upload = new Slingshot.Upload("myTrackUploads");
 
     upload.send(document.getElementById('file-track').files[0], function (error, downloadUrl) {
@@ -63,21 +58,42 @@ Template.editSong.events({
       console.log('uploaded file available here: '+downloadUrl);
       $('input[name=track]').val(downloadUrl);
       $('.playbackUrl').removeClass('hidden');
-      $('.progress').addClass('hidden');
+      $('.dimmer').removeClass('active');
       $('.file-upload-clear').html('<i class="fa fa-times"></i> Slett');
     }
     });
     uploader.set(upload);
   },
   'click .deleteSong': function(){
-    $('.modal-backdrop').hide();
-    Bert.alert('Sangen ble slettet!', 'info', 'growl-bottom-right');
-    Router.go('Home');
+    var self = this;
+    swal({
+      title: "Vil du slette sangen?",
+      text: "Du kan ikke angre etterpå...",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Ja, slett den",
+      cancelButtonText: "Nei, avbryt",
+      closeOnConfirm: true,
+      closeOnCancel: false
+    },
+    function(isConfirm) {
+      if (isConfirm) {
+        Router.go('Home');
+        Songs.remove(self._id);
+        Bert.alert('Sangen ble slettet!', 'info', 'growl-bottom-right');
+      } else {
+          swal("Avbrutt", "Ingenting ble slettet!", "error");
+      }
+    });
   }
 });
 
 Template.editSong.onRendered(function () {
-  $('.hjelpetekst').hide();
+  $('.hjelp').popup({
+    popup : $('.hjelpetekst.popup'),
+    on    : 'click'
+  });
   $('label[for="file-file"]').html('Velg fil<input class="hidden" id="file-file" file-input="file" type="file" accept="*">');
 });
 

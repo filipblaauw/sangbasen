@@ -1,70 +1,86 @@
 <template name="searchBox">
-  <div class="row">
-    <div class="col-xs-12 searchInput">
-      {{> EasySearch.Input index=songsIndex attributes=inputAttributes }}
+  <div class="ui center aligned fluid searchHeader">
+    <div class="ui container" id="searchHeader">
+      <div class="ui fluid big icon input">
+        {{> EasySearch.Input index=songsIndex attributes=inputAttributes }}
+        <i class="search icon"></i>
+      </div>
     </div>
+
   </div>
-
-  <br>
-
-  <table class="table table-hover table-responsive">
-    <thead>
-      <tr>
-        <th id="sortTitle" class="selected"><span title="Sorter etter tittel" data-toggle="tooltip" data-placement="top">Tittel</span></th>
-        <th id="sortArtist"><span title="Sorter etter artist" data-toggle="tooltip" data-placement="top">Artist</span></th>
-        <th id="sortGenre" class="hidden-xs"><span title="Sorter etter sjanger" data-toggle="tooltip" data-placement="top">Sjanger</span></th>
-        <th id="sortKey" class="hidden-mobile text-center"><span title="Sorter etter toneart" data-toggle="tooltip" data-placement="top"><i class="fa fa-music" aria-hidden="true"></i></span></th>
-        <th class="hidden-mobile"></th>
-      </tr>
-
-    </thead>
-    <tbody>
-      {{#EasySearch.Each index=songsIndex }}
-        <tr class="clickable-row" data-link="{{pathFor route='Song'}}">
-          <td><strong class="songTitle">{{title}}</strong></td>
-          <td>{{artist}}</td>
-          <td class="hidden-xs">
-            {{genre}}
-          </td>
-          <td class="hidden-mobile text-center">
-            {{#if key}}
-              {{key}}
-            {{else}}
-              –
-            {{/if}}
-          </td>
-          <td class="hidden-mobile text-right">
-            {{#if spotify}}
-              <i class="fa fa-spotify" aria-hidden="true"></i>
-            {{/if}}
-            {{#if track}}
-              <i class="fa fa-headphones" aria-hidden="true"></i>
-            {{/if}}
-            {{#if chords}}
-              <i class="fa fa-file-text-o" aria-hidden="true"></i>
-            {{/if}}
-            {{#if file}}
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-            {{/if}}
-          </td>
+  <div class="ui container">
+    <table class="ui compact unstackable selectable sortable table">
+      <thead>
+        <tr>
+          <th id="sortTitle" class="sorted descending"><span class="popup" data-inverted="" data-tooltip="Sorter etter sang" data-position="top center">Sang</span></th>
+          <th id="sortArtist" class="sorted"><span class="popup" data-inverted="" data-tooltip="Sorter etter artist" data-position="top center">Artist</span></th>
+          <th id="sortGenre" class="sorted mobile-hidden"><span class="popup" data-inverted="" data-tooltip="Sorter etter sjanger" data-position="top center">Sjanger</span></th>
+          <th id="sortKey" class="sorted mobile-hidden center aligned"><span class="popup" data-inverted="" data-tooltip="Sorter etter toneart" data-position="top center">Toneart</span></th>
+          <th class="right aligned mobile-hidden"></th>
         </tr>
-      {{/EasySearch.Each}}
-    </tbody>
-  </table>
 
-  {{> EasySearch.Pagination index=songsIndex customRenderPagination="myPagination"}}
+      </thead>
+      <tbody>
+        {{#EasySearch.Each index=songsIndex }}
+          <tr class="clickable-row" data-link="{{pathFor route='Song'}}">
+            <td><strong class="songTitle">{{title}}</strong></td>
+            <td>{{artist}}</td>
+            <td class="mobile-hidden">{{genre}}</td>
+            <td class="center aligned mobile-hidden">
+              {{#if key}}
+                {{key}}
+              {{else}}
+                –
+              {{/if}}
+            </td>
+            <td class="right aligned collapsing mobile-hidden">
+              {{#if spotify}}
+                <i class="green spotify icon"></i>
+              {{/if}}
+              {{#if track}}
+                <i class="music icon"></i>
+              {{/if}}
+              {{#if chords}}
+                <i class="file text outline icon"></i>
+              {{/if}}
+              {{#if file}}
+                <i class="file pdf outline icon"></i>
+              {{/if}}
+            </td>
+          </tr>
+        {{/EasySearch.Each}}
+      </tbody>
 
-  {{#EasySearch.IfNoResults index=songsIndex}}
-    <div>Beklager, ingen resultater</div>
-  {{/EasySearch.IfNoResults}}
+      {{> EasySearch.Pagination index=songsIndex customRenderPagination="myPagination"}}
+
+    </table>
+
+
+
+    {{#EasySearch.IfNoResults index=songsIndex}}
+      <div class="ui icon warning message">
+        <i class="meh icon"></i>
+        <div class="content">
+          <div class="header">
+            Fant ingen sanger
+          </div>
+          <p>Prøv et annet søkeord</p>
+        </div>
+      </div>
+    {{/EasySearch.IfNoResults}}
+  </div>
 </template>
 
 <template name="myPagination">
-  <nav class="text-center">
-    <ul class="pagination">
-      {{#each page}} 
-        <li class="page {{pageClasses this}}"> <a href="#">{{content}}</a> </li>
-       {{/each}}
-    </ul>
-  </nav>
+  <tfoot>
+    <tr>
+      <th colspan="5">
+        <div class="ui right floated tiny pagination menu">
+          {{#each page}} 
+            <a class="item page {{pageClasses this}}"> {{content}} </a>
+          {{/each}}
+        </div>
+      </th>
+    </tr>
+  </tfoot>
 </template>

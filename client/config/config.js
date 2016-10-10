@@ -1,7 +1,6 @@
 Router.plugin('seo', {
   defaults: {
     title: 'Sangbasen',
-    suffix: 'Sangbasen',
     separator: '|',
     description: 'Noter og tabs til folket!',
     image: 'http://sangbasen.blaauw.me/sangbasen.png',
@@ -16,4 +15,8 @@ Router.plugin('seo', {
       // etc.
     }
   }
+});
+
+Meteor.startup(() => {
+  AutoForm.setDefaultTemplate("semanticUI");
 });

@@ -1,12 +1,37 @@
 <template name="artist">
-  <div class="row">
-    <div class="container marginContainer">
-      <div class="col-xs-12">
-        <h2>Sanger av <span class="songTitle">{{artist}}</span></h2>
-        {{#each songs}}
-          <li><a href="{{pathFor route='Song'}}">{{title}}</a></li>
-        {{/each}}
-      </div>
+  <div class="ui container">
+    <h1 class="ui dividing header">Sanger av <span class="songTitle">{{artist}}</span></h1>
+
+    <div class="ui very relaxed divided list">
+      {{#each songs}}
+        <div class="item">
+
+          <div class="right floated content">
+            {{#if spotify}}
+              <i class="green spotify icon"></i>
+            {{/if}}
+            {{#if track}}
+              <i class="music icon"></i>
+            {{/if}}
+            {{#if chords}}
+              <i class="file text outline icon"></i>
+            {{/if}}
+            {{#if file}}
+              <i class="file pdf outline icon"></i>
+            {{/if}}
+            <div class="ui label">{{key}}</div>
+          </div>
+
+          <i class="large music middle aligned icon"></i>
+          <div class="content">
+            <a class="header" href="{{pathFor route='Song'}}">{{title}}</a>
+            <div class="description">{{genre}}, lagt til av {{userName}} {{created}}, oppdatert {{updated}}</div>
+
+          </div>
+        </div>
+      {{/each}}
     </div>
   </div>
+
+
 </template>

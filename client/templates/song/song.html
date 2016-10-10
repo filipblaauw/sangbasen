@@ -1,73 +1,109 @@
 <template name="Song">
-  <div class="container marginContainer">
-    {{> autoformModals}}
-    <div class="row topRow">
-      <div class="col-xs-4">
-        <a class="btn btn-default btn-tt" href="{{pathFor route='Home'}}" download><i class="fa fa-chevron-left"></i> Tilbake</a>
+  <div class="ui container">
+    <div class="ui stackable right aligned grid">
+      <div class="left floated left aligned four wide column">
+        <a class="ui tiny animated button left floated" tabindex="0" href="{{pathFor route='Home'}}">
+          <div class="visible content">Tilbake
+          </div>
+          <div class="hidden content">
+          <i class="left arrow icon"></i>
+          </div>
+        </a>
       </div>
-      <div class="col-xs-8 text-right">
+      <div class="right floated right aligned twelve wide column">
+
         {{#if favorites}}
-          <button class="btn btn-success btn-tt tooltipButtonRemove" title="Fjern fra favoritter" data-toggle="tooltip" data-placement="top" data-action="removeLikes">
-            <span class="fa fa-star" style=""></span>
-          </button>
+          <div class="ui tiny labeled button" tabindex="0" data-action="removeLikes">
+            <div class="ui tiny green icon button" data-inverted="" data-tooltip="Fjern fra favoritter" data-position="bottom left">
+              <i class="heart icon"></i>
+            </div>
+            {{#if likes}}
+              <a class="ui tiny basic label">
+                {{likes}} liker
+              </a>
+            {{else}}
+              <a class="ui tiny basic label">
+                Lik
+              </a>
+            {{/if}}
+          </div>
         {{else}}
-          <button class="btn btn-default btn-tt tooltipButtonAdd" title="Sett som favoritt" data-toggle="tooltip" data-placement="top" data-action="addLikes">
-            <span class="fa fa-star" style=""></span>
-          </button>
+          <div class="ui tiny labeled button" tabindex="0" data-action="addLikes">
+            <div class="ui tiny green icon button" data-inverted="" data-tooltip="Sett som favoritt" data-position="bottom left">
+              <i class="heart icon"></i>
+            </div>
+            {{#if likes}}
+              <a class="ui tiny basic label">
+                {{likes}}
+              </a>
+            {{else}}
+              <a class="ui tiny basic label">
+                Lik
+              </a>
+            {{/if}}
+          </div>
         {{/if}}
         {{#if isOwner}}
-          <a class="btn btn-info btn-tt" href="{{pathFor route='editSong'}}">Endre</a>
-          {{#afModal class="btn btn-danger btn-tt" formId="deleteSongModal" collection="Songs" operation="remove" doc=_id buttonContent="Slett" buttonClasses="btn btn-danger deleteSong" prompt="Vil du virkelig slette denne sangen?" title="Slett"}}
-            Slett
-          {{/afModal}}
+          <a class="ui tiny blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
+          <a class="ui tiny red button deleteSong">Slett</a>
         {{else}}
           {{#if isInRole 'admin'}}
-            <a class="btn btn-info btn-tt" href="{{pathFor route='editSong'}}">Endre</a>
-            {{#afModal class="btn btn-danger btn-tt" formId="deleteSongModal" collection="Songs" operation="remove" doc=_id buttonContent="Slett" buttonClasses="btn btn-danger deleteSong" prompt="Vil du virkelig slette denne sangen?" title="Slett"}}
-              Slett
-            {{/afModal}}
+            <a class="ui tiny blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
+            <a class="ui tiny red button deleteSong">Slett</a>
           {{/if}}
         {{/if}}
+
       </div>
     </div>
-    <hr>
-    <div class="row">
-      <div class="col-sm-4 col-xs-12 songInfo">
-        <h2 class="songTitle">{{title}}</h2>
-        <h5><strong>Artist:</strong> <a href="{{pathFor route='artist'}}">{{artist}}</a></h5>
-        <h5><strong>Sjanger:</strong> {{genre}}</h5>
-        <h5><strong>Toneart:</strong> {{key}}</h5>
-        <h5><strong>Lagt til av:</strong> {{userName}}</h5>
-        {{#if spotify}}
-          <iframe id="spotifytrack" src="https://embed.spotify.com/?uri={{spotify}}" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
-        {{/if}}
-        {{#if track}}
-          <audio controls style="width:100%;">
-            <source src="{{track}}">
-          </audio>
-        {{/if}}
-        <div class="saveButtons text-center">
-          {{#if file}}
-            <a class="btn btn-default btn-tt lastned" href="{{file}}" download><i class="fa fa-download"></i> Last ned noter</a><br>
 
+    <div class="ui divider"></div>
+    <div class="ui stackable grid">
+      <div class="ui six wide column">
+
+        <h1 class="header songTitle">{{title}}</h1>
+        <div class="songInfo">
+          <div class="ui relaxed divided list">
+            <div class="item">Artist: <a href="{{pathFor route='artist'}}">{{artist}}</a></div>
+            <div class="item">Sjanger: {{genre}}</div>
+            <div class="item">Toneart: {{key}}</div>
+            <div class="item">Lagt til av: {{userName}}, {{created}}</div>
+          </div>
+
+          {{#if spotify}}
+            <iframe id="spotifytrack" src="https://embed.spotify.com/?uri={{spotify}}&theme=white" width="100%" height="80" frameborder="0" allowtransparency="true"></iframe>
           {{/if}}
           {{#if track}}
-            <a class="btn btn-default btn-tt lastned" href="{{file}}" download><i class="fa fa-download"></i> Last ned playback</a><br>
+            <audio controls style="width:100%;">
+              <source src="{{track}}">
+            </audio>
           {{/if}}
-          {{#if chords}}
-            <a id="printChords" class="btn btn-default btn-tt lastned"><i class="fa fa-print"></i> Skriv ut akkorder</a>
-          {{/if}}
+          <div class="ui divider"></div>
+          <div class="ui center aligned container">
+            <div class="tiny ui buttons">
+              {{#if file}}
+                <a href="{{file}}" download class="ui compact tiny button" data-inverted="" data-tooltip="Last ned noter" data-position="bottom center">
+                  <i class="icon download"></i>
+                  Noter
+                </a>
+              {{/if}}
+              {{#if track}}
+                <a href="{{file}}" download class="ui compact tiny button" data-inverted="" data-tooltip="Last ned tracks" data-position="bottom center">
+                  <i class="icon music"></i>
+                  Tracks
+                </a>
+              {{/if}}
+              {{#if chords}}
+                <a id="printChords" class="ui compact tiny button" data-inverted="" data-tooltip="Skriv ut akkorder" data-position="bottom center">
+                  <i class="icon print"></i>
+                  Print
+                </a>
+              {{/if}}
+            </div>
+          </div>
         </div>
-        <div class="saveButtonMobile text-center">
-          {{#if file}}
-            <a class="btn btn-default btn-tt lastned" href="{{file}}">Se noter</a>
-          {{/if}}
-        </div>
-        {{#if likes}}
-          <span class="likes">{{likes}} <i class="fa fa-thumbs-up"></i></span>
-        {{/if}}
+
       </div>
-      <div class="col-sm-8 col-xs-12">
+      <div class="ui ten wide column">
         {{#if chords}}
           <pre id="printable" data-key="{{key}}">{{chords}}</pre>
         {{/if}}
@@ -75,7 +111,7 @@
           {{#if pdf}}
             <object data="{{file}}" type="application/pdf" class="embedObject"></object>
           {{else}}
-            <img src="{{file}}" class="img-responsive">
+            <img src="{{file}}">
           {{/if}}
         {{/if}}
       </div>

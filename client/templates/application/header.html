@@ -1,39 +1,23 @@
 <template name="header">
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{pathFor route='Home'}}">Sangbasen</a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="ui fixed inverted menu">
+    <div class="ui fluid container">
+      <a href="/" class="header item">
+        Sangbasen
+      </a>
       {{#if currentUser}}
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{pathFor route='add'}}"><span class="glyphicon glyphicon-cloud-upload"></span> Ny sang</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{currentUser.profile.name}} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ pathFor 'atChangePwd' }}"><i class="fa fa-lock"></i> Endre passord</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="{{ pathFor 'signOut' }}"><i class="fa fa-sign-out"></i> Logg ut</a></li>
-            </ul>
-          </li>
-          {{#if isInRole 'admin'}}
-            <li><a href="/admin" target="_blank">Admin</a></li>
-          {{/if}}
-        </ul>
+        <a href="{{ pathFor 'add' }}" class="item"><i class="add square icon"></i> Ny sang</a>
+        <div class="ui right dropdown item">
+          <i class="user icon"></i> {{currentUser.profile.name}}
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="{{ pathFor 'atChangePwd' }}" class="item"><i class="setting icon"></i> Endre passord</a>
+            <a href="{{ pathFor 'signOut' }}" class="item"><i class="sign out icon"></i> Logg ut</a>
+          </div>
+        </div>
       {{else}}
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{ pathFor 'atSignIn' }}"><i class="fa fa-sign-in"></i> Logg inn</a></li>
-          <li><a href="{{ pathFor 'atSignUp' }}"><i class="fa fa-user"></i> Opprett konto</a></li>
-        </ul>
+        <a href="{{ pathFor 'atSignIn' }}" class="item"><i class="sign in icon"></i> Logg inn</a>
+        <a href="{{ pathFor 'atSignUp' }}" class="item"><i class="add user icon"></i>Registrer</a>
       {{/if}}
     </div>
   </div>
-
-</nav>
 </template>

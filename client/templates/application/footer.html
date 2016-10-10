@@ -1,0 +1,47 @@
+<template name="footer">
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container" id="footer">
+      <div class="ui stackable center aligned inverted grid">
+        <div class="four wide column">
+          <h4 class="ui inverted header">Hjelp</h4>
+          <div class="ui inverted link list">
+            {{#if currentUser}}
+              <a class="item" href="{{ pathFor 'signOut' }}">Logg ut</a>
+              <a class="item" href="{{ pathFor 'atChangePwd' }}">Endre passord</a>
+            {{else}}
+              <a class="item" href="{{ pathFor 'atSignUp' }}">Registrer deg</a>
+              <a class="item" href="{{ pathFor 'atForgotPwd' }}">Glemt passord?</a>
+            {{/if}}
+
+            <a class="item" href="http://smallpdf.com/merge-pdf" target="_blank">PDF-verktøy</a>
+            <a class="item" href="mailto:filipbl@gmail.com">Ta kontakt</a>
+          </div>
+        </div>
+        <div class="eight wide column">
+          <h4 class="ui inverted header">Om Sangbasen</h4>
+          <p>
+            <a href="http://github.com/filipblaauw/sangbasen/" target="_blank"><i class="github big icon"></i></a>
+            <a href="mailto:filipbl@gmail.com"><i class="mail big icon"></i></a>
+          </p>
+          <p>Utviklet av Filip Blaauw<br>&copy; {{year}}</p>
+        </div>
+
+        <div class="two wide right floated column">
+          <div class="ui inverted statistic">
+            {{#if currentUser}}
+              <div class="value">
+                {{number}}
+              </div>
+              <div class="label">
+                sanger i sangbasen
+              </div>
+            {{/if}}
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</template>

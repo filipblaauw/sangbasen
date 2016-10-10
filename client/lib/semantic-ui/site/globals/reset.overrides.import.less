@@ -1,0 +1,190 @@
+/*******************************
+         Site Overrides
+*******************************/
+
+@small: ~"only screen and (max-width: 400px)";
+@phone: ~"only screen and (max-width: 767px)";
+@tablet: ~"only screen and (min-width: 768px) and (max-width: 1023px)";
+@desktop: ~"only screen and (min-width: 1024px)";
+
+// Color variables
+@blue: #009ACD;
+@grey: rgba(255,255,255,.5);
+@offwhite: rgba(255, 255, 255, 0.9);
+@gradientGreen: linear-gradient(0deg, rgba(80,113,133,1) 0%, rgba(0,41,41,1) 100%);
+
+.mobile-hidden {
+  @media @small {
+  	display: none !important;
+  }
+}
+
+
+a:hover {
+  color: @blue;
+}
+
+// General
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main {
+  margin-top: 4em;
+  margin-bottom: 2em;
+  flex: 1;
+}
+
+.hideMe {
+  display: none;
+}
+
+.searchHeader {
+  background: #2d2e2f;
+  margin-top: -16px;
+  padding: 2em 0;
+  margin-bottom: 2em;
+  @media @phone {
+    margin-left: -1em !important;
+    margin-right: -1em !important;
+  }
+}
+#searchHeader {
+  @media @phone {
+    padding-left: 1em !important;
+    padding-right: 1em !important;
+  }
+}
+.masthead {
+  margin-top: -4em;
+  background: @gradientGreen;
+  color: white;
+  padding: 3em 0 4em 0;
+
+  @media @phone {
+    margin-left: -1em !important;
+    margin-right: -1em !important;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+}
+
+// Song list styles
+.clickable-row {
+  cursor: pointer;
+}
+
+.red.heart.icon {
+  padding-left: 1px;
+}
+
+.songTitle {
+  text-transform: capitalize;
+}
+
+
+// Chords
+.chords {
+  font-family: monospace
+}
+
+.chordgroup {
+  position: static;
+}
+
+#printable {
+
+  span.c {
+    font-weight: bold;
+    color: @blue;
+  }
+}
+
+// Embeds
+.embedObject {
+  @media @desktop {
+    width: 100%;
+    height: 1000px;
+  }
+
+  @media @tablet {
+    width: 100%;
+    height: 600px;
+  }
+
+  @media @phone {
+    width: 100%;
+    height: 300px;
+  }
+}
+
+
+
+// Footer
+#footer {
+  padding: 2em;
+  font-size: .9em;
+
+  a, a:visited {
+    color: @grey;
+    -webkit-transition: .1s color ease;
+    transition: .1s color ease;
+    &:hover {
+      color: @offwhite !important;
+    }
+  }
+}
+
+// Print
+@media print {
+  body * {
+    visibility: hidden;
+    overflow-x: visible !important;
+  }
+  #main {
+    margin-top: 0 !important;
+    padding-left: 20px;
+
+    .six.wide.column {
+      width: 100% !important;
+    }
+  }
+  .songInfo {
+    display: none;
+  }
+  h1 {
+    visibility: visible;
+    font-family: 'Noto Sans', sans-serif !important;
+    font-weight: 700 !important;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+  }
+  #printable, #printable * {
+    visibility: visible;
+  }
+  #printable {
+    overflow: visible !important;
+    //display: block !important
+    //height: 100%
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+
+    span {
+      page-break-before: always;
+    }
+  }
+  @page {
+    margin: 2cm
+  }
+}
