@@ -1,0 +1,80 @@
+<template name="Welcome">
+
+  <div class="ui center aligned fluid container welcome">
+    <div class="masthead segment">
+      <h1>Sangbasen</h1>
+
+      <a class="ui inverted basic button" href="{{pathFor route='atSignIn'}}">
+        Logg inn
+      </a>
+      <a class="ui inverted basic button" href="{{pathFor route='atSignUp'}}">
+        Registrer deg
+      </a>
+    </div>
+    <br><br><br>
+
+    <div class="ui center aligned container">
+      <div class="ui three stackable cards">
+
+        <div class="ui grey card">
+          <div class="content">
+            <i class="huge grey search icon feature-icon"></i>
+            <div class="header">Søkbar base</div>
+            <div class="description">
+              <p>Søk etter sangtittel, artist sjanger eller deler av sangteksten.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ui orange card">
+          <div class="content">
+            <i class="huge orange file icon feature-icon"></i>
+            <div class="header">PDF og ChordPro</div>
+            <div class="description">
+              <p>Last opp og ned sanger i PDF eller ChordPro-format.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ui green card">
+          <div class="content">
+            <i class="huge green spotify icon feature-icon"></i>
+            <div class="header">Spotify og backingtracks</div>
+            <div class="description">
+              <p>Last opp backingtracks eller bygg inn Spotify-embed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ui three stackable cards">
+        <div class="ui red card">
+          <div class="content">
+            <i class="huge red heart icon feature-icon"></i>
+            <div class="header">Lagre favoritter</div>
+            <div class="description">
+              <p>Lagre dine favoritter. De vil ligge raskt tilgjengelig for deg!</p>
+            </div>
+          </div>
+        </div>
+        <div class="ui blue card">
+          <div class="content">
+            <i class="huge blue dropbox icon feature-icon"></i>
+            <div class="header">Dropbox-synkronisering</div>
+            <div class="description">
+              <p>PDF-filer kan lastes direkte ned til Dropbox-mappa di.</p>
+            </div>
+          </div>
+        </div>
+        <div class="ui teal card">
+          <div class="content">
+            <i class="huge teal thumbs up icon feature-icon"></i>
+            <div class="header">Gratis og enkelt!</div>
+            <div class="description">
+              <p>Registrering og bruk er gratis, uten forpliktelser.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</template>
