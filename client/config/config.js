@@ -19,4 +19,5 @@ Router.plugin('seo', {
 
 Meteor.startup(() => {
   AutoForm.setDefaultTemplate("semanticUI");
+  $('body').addClass('site');
 });
