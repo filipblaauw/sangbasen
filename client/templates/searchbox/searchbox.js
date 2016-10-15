@@ -1,7 +1,7 @@
 Template.searchBox.helpers({
   inputAttributes: function () {
     placeholder = function() {
-      return "Sang, artist, sjanger...";
+      return "Sang, artist, tekst...";
     }
     return { 'class': '', 'placeholder': placeholder };
   },
