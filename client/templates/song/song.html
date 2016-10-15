@@ -1,72 +1,83 @@
 <template name="Song">
   <div class="ui container">
-    <div class="ui stackable right aligned grid">
-      <div class="left floated left aligned four wide column">
-        <a class="ui tiny animated button left floated" tabindex="0" href="{{pathFor route='Home'}}">
-          <div class="visible content">Tilbake
-          </div>
-          <div class="hidden content">
+    <div class="ui  right aligned grid">
+      <div class="left floated left aligned four two column">
+        <a class="ui tiny compact icon button left floated" tabindex="0" href="{{pathFor route='Home'}}">
           <i class="left arrow icon"></i>
-          </div>
+
         </a>
       </div>
-      <div class="right floated right aligned twelve wide column">
-
+      <div class="right floated right aligned fourteen wide column">
         {{#if favorites}}
-          <div class="ui tiny labeled button" tabindex="0" data-action="removeLikes">
-            <div class="ui tiny green icon button" data-inverted="" data-tooltip="Fjern fra favoritter" data-position="bottom left">
+          <div class="ui tiny compact labeled button" tabindex="0" data-action="removeLikes">
+            <div class="ui tiny compact green icon button" data-inverted="" data-tooltip="Fjern fra favoritter" data-position="left center">
               <i class="heart icon"></i>
             </div>
             {{#if likes}}
-              <a class="ui tiny basic label">
+              <a class="ui tiny compact basic label">
                 {{likes}} liker
               </a>
             {{else}}
-              <a class="ui tiny basic label">
+              <a class="ui tiny compact basic label">
                 Lik
               </a>
             {{/if}}
           </div>
         {{else}}
-          <div class="ui tiny labeled button" tabindex="0" data-action="addLikes">
-            <div class="ui tiny green icon button" data-inverted="" data-tooltip="Sett som favoritt" data-position="bottom left">
+          <div class="ui tiny compact labeled button" tabindex="0" data-action="addLikes">
+            <div class="ui tiny compact green icon button" data-inverted="" data-tooltip="Sett som favoritt" data-position="left center">
               <i class="heart icon"></i>
             </div>
             {{#if likes}}
-              <a class="ui tiny basic label">
+              <a class="ui tiny compact basic label">
                 {{likes}}
               </a>
             {{else}}
-              <a class="ui tiny basic label">
+              <a class="ui tiny compact basic label">
                 Lik
               </a>
             {{/if}}
           </div>
         {{/if}}
         {{#if isOwner}}
-          <a class="ui tiny blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
-          <a class="ui tiny red button deleteSong">Slett</a>
+          <a class="ui tiny compact blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
+          <a class="ui tiny compact red button deleteSong">Slett</a>
         {{else}}
           {{#if isInRole 'admin'}}
-            <a class="ui tiny blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
-            <a class="ui tiny red button deleteSong">Slett</a>
+            <a class="ui tiny compact blue button" tabindex="0" href="{{pathFor route='editSong'}}">Endre</a>
+            <a class="ui tiny compact red button deleteSong">Slett</a>
           {{/if}}
         {{/if}}
-
       </div>
     </div>
 
-    <div class="ui divider"></div>
-    <div class="ui stackable grid">
-      <div class="ui six wide column">
 
-        <h1 class="header songTitle">{{title}}</h1>
+    <div class="ui stackable grid">
+      <div class="five wide column songInfo">
+        <h3 class="ui dividing header songTitle">{{title}}</h3>
         <div class="songInfo">
-          <div class="ui relaxed divided list">
-            <div class="item">Artist: <a href="{{pathFor route='artist'}}">{{artist}}</a></div>
-            <div class="item">Sjanger: {{genre}}</div>
-            <div class="item">Toneart: {{key}}</div>
-            <div class="item">Lagt til av: {{userName}}, {{created}}</div>
+          <div class="ui tiny list">
+            <div class="item listitem">
+              Artist: <a href="{{pathFor route='artist'}}"><div class="ui tiny label right floated">{{artist}}</div></a>
+            </div>
+            <div class="item listitem">
+              Sjanger: <div class="ui tiny label right floated">{{genre}}</div>
+            </div>
+            <div class="item listitem">
+              Toneart: <div class="ui tiny label right floated">{{key}}</div></div>
+            <div class="item listitem">
+              Lagt til av: <div class="ui tiny label right floated">{{userName}}, {{created}}</div>
+            </div>
+            {{#if bpm}}
+              <div class="item listitem">
+                Tempo: <div class="ui tiny label right floated">{{bpm}} BPM</div>
+              </div>
+            {{/if}}
+            {{#if signature}}
+              <div class="item listitem">
+                Taktart: <div class="ui tiny label right floated">{{signature}}</div>
+              </div>
+            {{/if}}
           </div>
 
           {{#if spotify}}
@@ -97,16 +108,68 @@
                   <i class="icon print"></i>
                   Print
                 </a>
+                <a id="chordproButton" class="ui compact tiny button" data-inverted="" data-tooltip="Chordpro-format" data-position="bottom center">
+                  Chordpro
+                </a>
               {{/if}}
             </div>
+            {{#if file}}
+            <div class="basic segment">
+              <a href="{{file}}" class="dropbox-saver" style="margin-top:10px;"></a>
+            </div>
+
+            {{/if}}
           </div>
         </div>
-
       </div>
-      <div class="ui ten wide column">
+
+      <div class="ui eleven wide column">
         {{#if chords}}
-          <pre id="printable" data-key="{{key}}">{{chords}}</pre>
+          <div class="ui modal" id="chordpro">
+            <i class="close icon"></i>
+            <div class="header">
+              {{title}}
+              <button class="ui tiny labeled icon button right floated" id="download-chordpro">
+                <i class="download icon"></i>
+                Last ned
+              </button>
+            </div>
+            <div class="content">
+              <div class="description">
+                <pre>{title: {{title}}}<br>{artist: {{artist}}}<br>{key: {{key}}}<br>{{#if bpm}}{tempo: {{bpm}}}{{/if}}<br>{{#if signature}}{time: {{signature}}}{{/if}}<br><br>{{chords}}</pre>
+              </div>
+            </div>
+          </div>
+          <div class="ui mini fluid twelve item compact pagination menu">
+            <a class="item transpose" data-key="A">A</a>
+            <a class="item transpose" data-key="Bb">Bb</a>
+            <a class="item transpose" data-key="B">B</a>
+            <a class="item transpose" data-key="C">C</a>
+            <a class="item transpose" data-key="Db">Db</a>
+            <a class="item transpose" data-key="D">D</a>
+            <a class="item transpose" data-key="Eb">Eb</a>
+            <a class="item transpose" data-key="E">E</a>
+            <a class="item transpose" data-key="F">F</a>
+            <a class="item transpose" data-key="Gb">Gb</a>
+            <a class="item transpose" data-key="G">G</a>
+            <a class="item transpose" data-key="Ab">Ab</a>
+          </div>
+          <div id="song-header">
+            <h1>{{title}}</h1>
+            <h3>{{artist}}</h3>
+
+            <div class="ui small label" id="key">{{key}}</div>
+            {{#if bpm}}
+              <div class="ui small label">{{bpm}} BPM</div>
+            {{/if}}
+            {{#if signature}}
+              <div class="ui small label">{{signature}}</div>
+            {{/if}}
+
+          </div>
+          <div id="song-container"></div>
         {{/if}}
+
         {{#if file}}
           {{#if pdf}}
             <object data="{{file}}" type="application/pdf" class="embedObject"></object>
