@@ -4,10 +4,13 @@ Template.songList.helpers({
   },
   favorites: function() {
     var user = Meteor.user()._id;
-    return Songs.find({voters: user});
+    return Songs.find({voters: user}, {limit: 5});
   },
   mostLiked: function() {
-    return Songs.find({likes: { $gt: 0 }}, {limit: 10, sort: {likes: "desc"}});
+    return Songs.find({likes: { $gt: 0 }}, {limit: 5, sort: {likes: "desc"}});
+  },
+  latest: function() {
+    return Songs.find({}, {sort: {createdAt: -1}, limit: 5});
   }
 });
 
