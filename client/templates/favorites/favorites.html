@@ -1,0 +1,37 @@
+<template name="favorites">
+  <div class="ui container">
+    <h1 class="ui dividing header">Dine favoritter</h1>
+
+    <div class="ui very relaxed divided list">
+      {{#each songs}}
+        <div class="item">
+
+          <div class="right floated content">
+            {{#if spotify}}
+              <i class="green spotify icon"></i>
+            {{/if}}
+            {{#if track}}
+              <i class="music icon"></i>
+            {{/if}}
+            {{#if chords}}
+              <i class="file text outline icon"></i>
+            {{/if}}
+            {{#if file}}
+              <i class="file pdf outline icon"></i>
+            {{/if}}
+            <div class="ui label">{{key}}</div>
+          </div>
+
+          <i class="large red heart middle aligned icon"></i>
+          <div class="content">
+            <a class="header" href="{{pathFor route='Song'}}">{{title}}</a>
+            <div class="description">{{genre}}, lagt til av {{userName}} {{created}}</div>
+
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+
+</template>
