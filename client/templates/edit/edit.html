@@ -8,20 +8,19 @@
         <div class="row">
           <div class="column">
             <h1 class="ui dividing header">Endre {{title}}</h1>
+
+            {{> helpTexts}}
+
           </div>
         </div>
       </div>
 
       {{#autoForm collection="Songs" doc=this id="editSongForm" type="update"}}
         <div class="ui stackable grid">
-          <div class="six wide column">
-            {{> afQuickField name='file'}}
-            {{> afQuickField name='title'}}
-            {{> afQuickField name='artist'}}
-            {{> afQuickField name='spotify'}}
-            {{> afQuickField name='genre'}}
-            {{> afQuickField name='key'}}
-            <p class="small text-muted">Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G.</p>
+          <div class="five wide column">
+
+            {{> songForm}}
+
             <div class="field">
               <label>Last opp playbackspor</label>
               <input type="file" class="uploadFile" id="file-track">
@@ -31,16 +30,11 @@
             </div>
           </div>
 
-          <div class="ten wide column">
+          <div class="eleven wide column">
             {{> afQuickField name='chords'}}
-            <div class="ui tiny right floated icon button hjelp">
-              <i class="help icon"></i>
-            </div>
-            <div class="ui hjelpetekst popup">
-              <p>Akkordene skrives over på linja over teksten. Du kan ikke ha tekst og akkorder på samme linje.</p>
-              <p>I akkordrekker uten tekst under (f.eks. intro) bør det være 3 mellomrom mellom hver akkord.</p>
-              <p>H-akkorder skrives på norsk med H, ikke engelsk B, Bm, etc.</p>
-            </div>
+
+            {{> chordHelpText}}
+
           </div>
           <div class="row">
             <div class="right aligned column">
