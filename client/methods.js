@@ -5,7 +5,7 @@ upvote = function(currentSong){
     return false;
   }
   if (currentSong) {
-    if (_.contains(currentSong.voters, Meteor.userId())) {
+    if (currentSong.voters.includes(Meteor.userId())) {
       Bert.alert( 'alertAlreadyLiked()', 'info', 'fixed-top' );
       return false;
     }
@@ -20,7 +20,7 @@ downvote = function(currentSong){
     return false;
   }
   if (currentSong) {
-    if (_.contains(currentSong.voters, Meteor.userId()))
+    if (currentSong.voters.includes(Meteor.userId()))
     Songs.update(currentSong._id, {$pull: {voters: Meteor.userId()}, $inc: {likes: -1}});
   }
 };
