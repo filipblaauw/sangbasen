@@ -92,7 +92,7 @@ Template.Song.onRendered(function() {
 
   // Generate .chordpro file for download
   function downloadInnerHtml(filename, elId, mimeType) {
-    var data = Songs.findOne({slug: Router.current().params.slug});
+    var data = Songs.findOne({slug: Router.current().params.slug, slug2: Router.current().params.slug2});
     var elHtml = '{title: '+data.title + '}\n' + '{artist: '+data.artist + '}\n' + '{key: '+data.key + '}\n' + '{bpm: '+data.bpm + '}\n' + '{time: '+data.time + '}\n\n' + data.chords;
     var link = document.createElement('a');
     mimeType = mimeType || 'text/plain';
@@ -158,7 +158,7 @@ Template.Song.onRendered(function() {
 
 
       // Load data from current route
-      var data = Songs.findOne({slug: Router.current().params.slug});
+      var data = Songs.findOne({slug: Router.current().params.slug, slug2: Router.current().params.slug2});
       var chords = data.chords;
       var key = $(this).attr('data-key');
       var $song = $(chordpro.parse(chords).render(key));
