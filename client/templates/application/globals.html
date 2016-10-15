@@ -1,0 +1,49 @@
+<template name="keyMessage">
+  <div class="ui compact message">
+    <p>Om sangen starter eller slutter i Em, vil tonearten være parallelltonearten G. Vi bruker også b-tonearter i stedet for #-tonearter. Engelsk B i stedet for H.</p>
+  </div>
+</template>
+
+<template name="chordHelpText">
+  <div class="ui tiny right floated icon button hjelp">
+    <i class="help icon"></i>
+  </div>
+  <div class="ui hjelpetekst popup">
+    <p>Akkorder skrives i braketter like før stavelsen de kommer på i sangen:<pre>Swing [D]low, sweet [G]chari[D]ot</pre></p>
+    <p>Angi vers, refreng, osv. slik:<pre>Verse 1:<br>...<br>Chorus:<br>...</pre></p>
+    <p>H-akkorder skrives på engelsk med B</p>
+  </div>
+</template>
+
+<template name="helpTexts">
+  <div class="ui horizontal segments">
+    <div class="ui segment">
+      <p>
+        Tillatte filtyper er .pdf, .jpg, .png og .gif.
+      </p>
+    </div>
+    <div class="ui segment">
+      <p>
+        Noter med flere sider, kan slås sammen til ett pdf-dokument med <a href="http://smallpdf.com/merge-pdf" target="_blank">dette verktøyet</a>.
+      </p>
+    </div>
+    <div class="ui segment">
+      <p>
+        For akkordskjema, følg standarden for <a href="http://www.chordpro.org/chordpro/index.html" target="_blank">.chordpro-formatet</a>.
+      </p>
+    </div>
+  </div>
+</template>
+
+<template name="songForm">
+  {{> afQuickField name='file'}}
+  {{> afQuickField name='title'}}
+  {{> afQuickField name='artist'}}
+  {{> afQuickField name='spotify'}}
+  {{> afQuickField name='genre'}}
+  {{> afQuickField name='signature'}}
+  {{> afQuickField name='bpm'}}
+  {{> afQuickField name='key'}}
+
+  {{> keyMessage}}
+</template>
