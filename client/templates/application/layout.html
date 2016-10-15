@@ -24,13 +24,10 @@
 </head>
 
 <template name="layout">
-	<body class="site">
-    {{#if currentUser}}
-      {{> header}}
-    {{/if}}
+    {{> header}}
 	  <div id="main">
 		  {{> yield}}
 		</div>
     {{> footer}}
-	</body>
+
 </template>
