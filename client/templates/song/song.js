@@ -110,9 +110,14 @@ Template.Song.onRendered(function() {
 
 
   // Create a Dropbox button
-  $.getScript("https://www.dropbox.com/static/api/2/dropins.js",function(){
-    Dropbox.init({ appKey: 'p5b0bu8fra0q7vf' });
-  });
+
+  if (window.Dropbox) {
+    
+  } else {
+    $.getScript("https://www.dropbox.com/static/api/2/dropins.js",function(){
+      Dropbox.init({ appKey: 'p5b0bu8fra0q7vf' });
+    });
+  }
 
   $('.button').popup();
 
