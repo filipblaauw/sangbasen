@@ -97,9 +97,18 @@ Template.editSong.onRendered(function () {
   $('label[for="file-file"]').html('Velg fil<input class="hidden" id="file-file" file-input="file" type="file" accept="*">');
 });
 
-AutoForm.addHooks(['editSongForm'], {
+// If chords in song is H, convert to B in form
+var postHooks = {
+  docToForm: function(doc) {
+    if (typeof doc.chords === "string") {
+      doc.chords = doc.chords.replace(/\[H(.*?)\]/gi, '[B$1]');
+    }
+    return doc;
+  },
   onSuccess: function(operation, result, template) {
-    Bert.alert( 'Sangen ble oppdatert!', 'success', 'growl-bottom-right' );
+    Bert.alert('Sangen ble oppdatert!', 'success', 'growl-bottom-right');
     Router.go('Home');
   }
-});
+}
+
+AutoForm.addHooks('editSongForm', postHooks);

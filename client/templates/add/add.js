@@ -68,9 +68,18 @@ Template.insertSongForm.onRendered(function() {
   $('label[for="uploadFile"]').html('Velg fil<input class="hideMe" id="file-track" file-input="file" type="file" accept="*">');
 });
 
-AutoForm.addHooks(['insertSongForm'], {
+// ensure H chords are converted to B
+var postHooks = {
+  formToDoc: function(doc) {
+    if (typeof doc.chords === "string") {
+      doc.chords = doc.chords.replace(/\[H(.*?)\]/gi, '[B$1]');
+    }
+    return doc;
+  },
   onSuccess: function(operation, result, template) {
     Bert.alert('Sangen ble lagt til!', 'success', 'growl-bottom-right');
     Router.go('Home');
   }
-});
+}
+
+AutoForm.addHooks('insertSongForm', postHooks);
