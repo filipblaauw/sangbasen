@@ -1,6 +1,7 @@
 <template name="favorites">
   <div class="ui container">
     <h1 class="ui dividing header">Dine favoritter</h1>
+    {{#if favorites}}
 
     <div class="ui very relaxed divided list">
       {{#each songs}}
@@ -31,6 +32,12 @@
         </div>
       {{/each}}
     </div>
+    {{else}}
+      <div class="ui segment">
+        <p>Du har ingen favorittsanger ennå, men det er enkelt å legge til. Trykk på "Lik"-knappen neste gang du ser på en sang,
+        og den vil legge seg i denne lista.</p>
+      </div>
+    {{/if}}
   </div>
 
 

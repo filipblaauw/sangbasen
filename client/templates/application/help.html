@@ -1,0 +1,92 @@
+<template name="Help">
+
+  <div class="ui container">
+
+    <h1 class="ui dividing header">Hjelp og nyttige triks</h1>
+
+    <h2>Skrive sanger i .chordpro format</h2>
+    <p>
+      Sangbasen bruker .chordpro formatet for å generere flotte akkordskjemaer.
+      Fordelene med dette formatet er at sangen kan transponeres med korrekte
+      intervaller, og at filen kan lastes ned og åpnes i programmer som Onsong.
+      Du kan også forhåndsvise hvordan sangen din ser ut på <a href="http://onlinesong.herokuapp.com/" target="_blank">denne siden</a>.
+    </p>
+    <h3>Akkorder</h3>
+    <p>
+      Akkordene skrives i braketter, som dette:
+      <div class="ui segment">
+        <code>[Db]Når regnet sler imot deg</code>
+      </div>
+      På tastaturet får du braketter med alt+parantes. Da vil systemet oppfatte innholdet i braketten som en akkord, og vise den i riktig format.
+      Husk å bruke engelsk versjon av H-akkorder. f.eks Bm7, B/F# osv.
+    </p>
+    <p>
+      Akkorder skrives på samme linje som teksten, og hver akkord skrives foran stavelsen den kommer på.
+      <div class="ui segment">
+        <code>
+          [Db]Når regnet sler imot deg, [Ab/C]der du går<br>
+          [Abm/B]og når du ikkje veit di [Gb/Bb]arme råd
+        </code>
+      </div>
+    </p>
+    <h3>Tilgjengelige akkorder</h3>
+    <p>
+      Her er akkorder som systemet kjenner igjen. Hver av dem kan også kombineres med skråstrek og basstone, f.eks. C/E.
+      <div class="ui list">
+        <div class="item">[C]</div>
+        <div class="item">[Cadd9]</div>
+        <div class="item">[C2]</div>
+        <div class="item">[Cadd11]</div>
+        <div class="item">[C4]</div>
+        <div class="item">[C6]</div>
+        <div class="item">[C7]</div>
+        <div class="item">[C9]</div>
+        <div class="item">[Cmaj7]</div>
+        <div class="item">[Cm7]</div>
+        <div class="item">[C7]</div>
+        <div class="item">[Cdim7]</div>
+        <div class="item">[Cmaj9]</div>
+        <div class="item">[Cmaj11]</div>
+        <div class="item">[Cmaj13]</div>
+        <div class="item">[C7#5]</div>
+        <div class="item">[Cmaj7#5]</div>
+        <div class="item">[Cm7add9]</div>
+        <div class="item">[Cmin9]</div>
+        <div class="item">[Caug]</div>
+        <div class="item">[C+]</div>
+        <div class="item">[Cdim]</div>
+      </div>
+    </p>
+    <h3>Sangdeler (intro, vers, refreng, etc)</h3>
+    <p>
+      For å ha en god struktur i akkordskjemaet, begynn hver sangdel med Intro, Vers, Refreng, etc, etterfølgt av kolon på en egen linje før teksten.
+      <div class="ui segment">
+        <code>
+          Vers 2:<br>
+          [Db]Når alle nattas stjerner [Ab/C]viser seg<br>
+          [Abm/B]og ingen er der for å [Gb/Bb]trøste deg<br>
+          [Gbm/A]då vil du alltid ha ein [Db/Ab]heim hjå meg<br>
+          [Eb]fordi eg [Ab] elskar [Db]deg<br><br>
+          Refreng:<br>
+          [Gb]Eg veit du ikkje har best[Db/F]emt deg, men<br>
+          [F7/A]eg lar deg ta den tid du [Bbm]vil<br>
+          [Gb]for eg forstod heilt frå beg[Db/F]ynnelsen<br>
+          det [Eb]er hjå meg du høyrer [Ab]til
+        </code>
+      </div>
+    </p>
+
+    <h2>Finne Spotify-URI</h2>
+    <p>
+      Vil du ha en Spotify-spiller som spiller sangen sammen med notene, kan du kopiere inn Spotify-URI. Den finner du ved å høyreklikke på
+      sangen i Spotify, og velge "Copy Spotify URI" og lim inn koden i skjemaet.
+    </p>
+    <img src="https://qph.ec.quoracdn.net/main-qimg-1dda7fa4478a6d61145f24eaef9404f4?convert_to_webp=true" alt="">
+
+    <h2>Finne tempoet til sangen</h2>
+    <p>
+      Det finnes mange apper som lar deg tappe tempoet mens du hører på sangen. En av dem er nettsiden <a href="http://www.bpm-counter.com/" target="_blank">BPM Counter</a>.
+    </p>
+  </div>
+
+</template>
