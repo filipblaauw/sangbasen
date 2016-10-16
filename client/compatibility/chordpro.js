@@ -17899,7 +17899,6 @@ function LineSegment(chord, text) {
 
 function Song() {
   var data = Songs.findOne({slug: Router.current().params.slug, slug2: Router.current().params.slug2});
-  console.log(data);
 	this.title = data.title;
 	this.subtitle = data.artist;
 	this.album = '';
