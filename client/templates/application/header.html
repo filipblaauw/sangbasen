@@ -1,15 +1,18 @@
 <template name="header">
   <div class="ui tiny fixed inverted menu">
     <div class="ui fluid container">
-      <a href="/" class="header item">
+      <a href="{{pathFor route='Home'}}" class="header item">
         Sangbasen
       </a>
       {{#if currentUser}}
-        <a href="{{ pathFor 'add' }}" class="item"><i class="add square icon"></i> Ny sang</a>
+        <a href="{{pathFor route='add'}}" class="item"><i class="add square icon"></i> Ny sang</a>
         <div class="ui right dropdown item">
           <i class="user icon"></i> {{currentUser.profile.name}}
           <i class="dropdown icon"></i>
           <div class="menu">
+            {{#if isInRole 'admin'}}
+               <a href="{{ pathFor route='users' }}" class="item"><i class="users icon"></i> Brukere</a>
+            {{/if}}
             <a href="{{ pathFor 'atChangePwd' }}" class="item"><i class="setting icon"></i> Endre passord</a>
             <a href="{{ pathFor 'signOut' }}" class="item"><i class="sign out icon"></i> Logg ut</a>
           </div>

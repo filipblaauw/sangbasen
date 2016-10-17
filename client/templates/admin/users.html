@@ -1,0 +1,38 @@
+<template name="users">
+  {{#if isInRole 'admin'}}
+
+    <div class="ui container">
+      <h1 class="ui dividing header">Registrerte brukere</h1>
+
+      <table class="ui compact table">
+        <thead>
+          <tr>
+            <th>Brukernavn</th>
+            <th>Ble medlem</th>
+            <th>E-post</th>
+            <th>Bruker-ID</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+            <tr>
+              <td>{{profile.name}}</td>
+              <td>{{createdAt}}</td>
+              <td><a href="mailto:{{emails.[0].address}}">{{emails.[0].address}}</a></td>
+              <td>{{_id}}</td>
+              <td class="right aligned">
+                <button class="ui tiny red icon button delete">
+                  <i class="remove icon"></i>
+                </button>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/if}}
+
+
+
+</template>
