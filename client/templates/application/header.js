@@ -1,3 +1,9 @@
+Template.header.events({
+  'click .ui.dropdown': function() {
+    $('.ui.dropdown').dropdown();
+  }
+});
+
 Template.header.onRendered(function (){
-  $('.ui.dropdown').dropdown();
+  this.$('.ui.dropdown').dropdown();
 });
