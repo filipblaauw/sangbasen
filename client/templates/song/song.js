@@ -93,7 +93,7 @@ Template.Song.onRendered(function() {
   // Generate .chordpro file for download
   function downloadInnerHtml(filename, elId, mimeType) {
     var data = Songs.findOne({slug: Router.current().params.slug, slug2: Router.current().params.slug2});
-    var elHtml = '{title: '+data.title + '}\n' + '{artist: '+data.artist + '}\n' + '{key: '+data.key + '}\n' + '{bpm: '+data.bpm + '}\n' + '{time: '+data.time + '}\n\n' + data.chords;
+    var elHtml = '{title: '+data.title + '}\n' + '{artist: '+data.artist + '}\n' + '{key: '+data.key + '}\n' + '{tempo: '+data.bpm + '}\n' + '{time: '+data.signature + '}\n\n' + data.chords;
     var link = document.createElement('a');
     mimeType = mimeType || 'text/plain';
 
@@ -112,7 +112,7 @@ Template.Song.onRendered(function() {
   // Create a Dropbox button
 
   if (window.Dropbox) {
-    
+
   } else {
     $.getScript("https://www.dropbox.com/static/api/2/dropins.js",function(){
       Dropbox.init({ appKey: 'p5b0bu8fra0q7vf' });
