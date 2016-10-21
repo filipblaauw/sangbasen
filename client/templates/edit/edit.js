@@ -107,7 +107,9 @@ var postHooks = {
   },
   onSuccess: function(operation, result, template) {
     Bert.alert('Sangen ble oppdatert!', 'success', 'growl-bottom-right');
-    Router.go('Home');
+    var song = this.currentDoc;
+    var newSong = Songs.findOne({_id: song._id});
+    Router.go('Song', {slug: newSong.slug, slug2: newSong.slug2});
   }
 }
 
