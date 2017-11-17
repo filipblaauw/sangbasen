@@ -18,6 +18,7 @@ module.exports = {
 
 module.exports = {
   // sevenths
+  Major7flat: ['Major', ["7b9"]],
   Major7: ['Major', ["maj7", "Maj7", "M7", "+7"]],
   Minor7: ['Minor', ["m7", "Min7", "min7", "minor7"]],
   Dominant7: ['Major', ["7", "dom7", "dominant7"]],
@@ -33,7 +34,8 @@ module.exports = {
   AugmentedMajor7: ['Major', ["maj7#5", "maj7(#5]"]],
 
   // TODO: I don't know what this one is - can't find it on wikipedia
-  Minor9: ['Minor', ["min9", "m9", "minor9"]]
+  Minor9: ['Minor', ["min9", "m9", "minor9"]],
+  Minor7flat9: ['Minor', ["m7b9"]]
 
 };
 },{}],3:[function(require,module,exports){
